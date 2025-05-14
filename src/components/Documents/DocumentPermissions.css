@@ -1,0 +1,49 @@
+.owner-info {
+  border-left: 4px solid #321fdb;
+}
+
+.permissions-table th,
+.permissions-table td {
+  vertical-align: middle;
+}
+
+.permission-select {
+  min-width: 140px;
+}
+
+.permission-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35em 0.65em;
+  font-size: 0.75em;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+}
+
+.permission-badge svg {
+  margin-right: 0.25rem;
+}
+
+.permission-badge-view {
+  background-color: #0dcaf0;
+  color: #fff;
+}
+
+.permission-badge-comment {
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+.permission-badge-edit {
+  background-color: #198754;
+  color: #fff;
+}
+
+.permission-badge-admin {
+  background-color: #dc3545;
+  color: #fff;
+}

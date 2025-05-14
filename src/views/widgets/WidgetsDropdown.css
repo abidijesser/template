@@ -1,0 +1,79 @@
+/* Styles pour les widgets du tableau de bord */
+
+.dashboard-widgets {
+  margin-bottom: 2rem;
+}
+
+/* Styles pour les widgets avec graphiques */
+.widget-with-chart {
+  transition: all 0.3s ease;
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+
+.widget-with-chart:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Styles pour les cartes */
+.card {
+  transition: all 0.3s ease;
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.card-title {
+  font-weight: 600;
+  color: #3c4b64;
+}
+
+/* Styles pour les graphiques */
+.chart-container {
+  position: relative;
+  margin: 0 auto;
+}
+
+/* Styles pour le cercle de progression */
+.progress-circle-container {
+  position: relative;
+}
+
+/* Styles pour les boutons */
+.btn-outline-primary {
+  transition: all 0.2s ease;
+}
+
+.btn-outline-primary:hover {
+  background-color: #321fdb;
+  color: white;
+  box-shadow: 0 4px 8px rgba(50, 31, 219, 0.2);
+}
+
+/* Animation pour les graphiques */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chart-container {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .widget-with-chart {
+    margin-bottom: 1rem;
+  }
+}

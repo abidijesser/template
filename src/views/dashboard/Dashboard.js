@@ -1,387 +1,792 @@
-import React from 'react'
-import classNames from 'classnames'
+// filepath: c:\Users\Lenovo\Desktop\pi1\MERN-Project-Manager\Client\src\views\dashboard\Dashboard.js
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import {
-  CAvatar,
   CButton,
-  CButtonGroup,
   CCard,
   CCardBody,
-  CCardFooter,
   CCardHeader,
   CCol,
   CProgress,
   CRow,
-  CTable,
-  CTableBody,
-  CTableDataCell,
-  CTableHead,
-  CTableHeaderCell,
-  CTableRow,
+  CBadge,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import {
-  cibCcAmex,
-  cibCcApplePay,
-  cibCcMastercard,
-  cibCcPaypal,
-  cibCcStripe,
-  cibCcVisa,
-  cibGoogle,
-  cibFacebook,
-  cibLinkedin,
-  cifBr,
-  cifEs,
-  cifFr,
-  cifIn,
-  cifPl,
-  cifUs,
-  cibTwitter,
-  cilCloudDownload,
   cilPeople,
-  cilUser,
-  cilUserFemale,
+  cilChart,
+  cilTask,
+  cilCalendar,
+  cilFolder,
+  cilArrowRight,
+  cilCheck,
+  cilSpeedometer,
+  cilLightbulb,
+  cilSettings,
+  cilPuzzle,
+  cilGraph,
+  cilBriefcase,
+  cilChatBubble,
 } from '@coreui/icons'
 
-import avatar1 from 'src/assets/images/avatars/1.jpg'
-import avatar2 from 'src/assets/images/avatars/2.jpg'
-import avatar3 from 'src/assets/images/avatars/3.jpg'
-import avatar4 from 'src/assets/images/avatars/4.jpg'
-import avatar5 from 'src/assets/images/avatars/5.jpg'
-import avatar6 from 'src/assets/images/avatars/6.jpg'
+import projectManagementImage from 'src/assets/images/gestion_projet.png'
+import worktrackLogo from 'src/assets/images/worktrack-logo.svg'
 
-import WidgetsBrand from '../widgets/WidgetsBrand'
 import WidgetsDropdown from '../widgets/WidgetsDropdown'
 import MainChart from './MainChart'
 
+import RecentActivityListWidget from '../../components/ActivityLog/RecentActivityListWidget'
+import UpcomingEvents from '../../components/UpcomingEvents/UpcomingEvents'
+import TeamMembersWidget from '../../components/dashboard/TeamMembersWidget'
+import socketService from '../../services/socketService'
+import { getProjectsForDashboard } from '../../services/dashboardService'
+import './Dashboard.css'
+
 const Dashboard = () => {
-  const progressExample = [
-    { title: 'Visits', value: '29.703 Users', percent: 40, color: 'success' },
-    { title: 'Unique', value: '24.093 Users', percent: 20, color: 'info' },
-    { title: 'Pageviews', value: '78.706 Views', percent: 60, color: 'warning' },
-    { title: 'New Users', value: '22.123 Users', percent: 80, color: 'danger' },
-    { title: 'Bounce Rate', value: 'Average Rate', percent: 40.15, color: 'primary' },
-  ]
+  const [dashboardProjects, setDashboardProjects] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [allProjects, setAllProjects] = useState([])
 
-  const progressGroupExample1 = [
-    { title: 'Monday', value1: 34, value2: 78 },
-    { title: 'Tuesday', value1: 56, value2: 94 },
-    { title: 'Wednesday', value1: 12, value2: 67 },
-    { title: 'Thursday', value1: 43, value2: 91 },
-    { title: 'Friday', value1: 22, value2: 73 },
-    { title: 'Saturday', value1: 53, value2: 82 },
-    { title: 'Sunday', value1: 9, value2: 69 },
-  ]
+  // Fonction pour sélectionner des projets aléatoires à afficher
+  const selectRandomProjects = () => {
+    if (allProjects.length === 0) return
 
-  const progressGroupExample2 = [
-    { title: 'Male', icon: cilUser, value: 53 },
-    { title: 'Female', icon: cilUserFemale, value: 43 },
-  ]
+    // Indiquer le chargement
+    setLoading(true)
 
-  const progressGroupExample3 = [
-    { title: 'Organic Search', icon: cibGoogle, percent: 56, value: '191,235' },
-    { title: 'Facebook', icon: cibFacebook, percent: 15, value: '51,223' },
-    { title: 'Twitter', icon: cibTwitter, percent: 11, value: '37,564' },
-    { title: 'LinkedIn', icon: cibLinkedin, percent: 8, value: '27,319' },
-  ]
+    // Sélectionner 3 projets aléatoires pour l'affichage
+    let randomProjects = [...allProjects]
 
-  const tableExample = [
-    {
-      avatar: { src: avatar1, status: 'success' },
-      user: {
-        name: 'Yiorgos Avraamu',
-        new: true,
-        registered: 'Jan 1, 2023',
-      },
-      country: { name: 'USA', flag: cifUs },
-      usage: {
-        value: 50,
-        period: 'Jun 11, 2023 - Jul 10, 2023',
-        color: 'success',
-      },
-      payment: { name: 'Mastercard', icon: cibCcMastercard },
-      activity: '10 sec ago',
-    },
-    {
-      avatar: { src: avatar2, status: 'danger' },
-      user: {
-        name: 'Avram Tarasios',
-        new: false,
-        registered: 'Jan 1, 2023',
-      },
-      country: { name: 'Brazil', flag: cifBr },
-      usage: {
-        value: 22,
-        period: 'Jun 11, 2023 - Jul 10, 2023',
-        color: 'info',
-      },
-      payment: { name: 'Visa', icon: cibCcVisa },
-      activity: '5 minutes ago',
-    },
-    {
-      avatar: { src: avatar3, status: 'warning' },
-      user: { name: 'Quintin Ed', new: true, registered: 'Jan 1, 2023' },
-      country: { name: 'India', flag: cifIn },
-      usage: {
-        value: 74,
-        period: 'Jun 11, 2023 - Jul 10, 2023',
-        color: 'warning',
-      },
-      payment: { name: 'Stripe', icon: cibCcStripe },
-      activity: '1 hour ago',
-    },
-    {
-      avatar: { src: avatar4, status: 'secondary' },
-      user: { name: 'Enéas Kwadwo', new: true, registered: 'Jan 1, 2023' },
-      country: { name: 'France', flag: cifFr },
-      usage: {
-        value: 98,
-        period: 'Jun 11, 2023 - Jul 10, 2023',
-        color: 'danger',
-      },
-      payment: { name: 'PayPal', icon: cibCcPaypal },
-      activity: 'Last month',
-    },
-    {
-      avatar: { src: avatar5, status: 'success' },
-      user: {
-        name: 'Agapetus Tadeáš',
-        new: true,
-        registered: 'Jan 1, 2023',
-      },
-      country: { name: 'Spain', flag: cifEs },
-      usage: {
-        value: 22,
-        period: 'Jun 11, 2023 - Jul 10, 2023',
-        color: 'primary',
-      },
-      payment: { name: 'Google Wallet', icon: cibCcApplePay },
-      activity: 'Last week',
-    },
-    {
-      avatar: { src: avatar6, status: 'danger' },
-      user: {
-        name: 'Friderik Dávid',
-        new: true,
-        registered: 'Jan 1, 2023',
-      },
-      country: { name: 'Poland', flag: cifPl },
-      usage: {
-        value: 43,
-        period: 'Jun 11, 2023 - Jul 10, 2023',
-        color: 'success',
-      },
-      payment: { name: 'Amex', icon: cibCcAmex },
-      activity: 'Last week',
-    },
-  ]
+    // Mélanger les projets et prendre les 3 premiers
+    randomProjects = randomProjects.sort(() => 0.5 - Math.random())
+
+    // Limiter à 3 projets si nécessaire
+    if (randomProjects.length > 3) {
+      randomProjects = randomProjects.slice(0, 3)
+    }
+
+    // Mettre à jour l'affichage avec les projets aléatoires
+    setDashboardProjects(randomProjects)
+
+    // Terminer le chargement après un court délai pour l'effet visuel
+    setTimeout(() => {
+      setLoading(false)
+    }, 300)
+  }
+
+  // Fonction pour récupérer les projets pour le tableau de bord
+  const fetchDashboardProjects = async () => {
+    try {
+      setLoading(true)
+
+      // Récupérer tous les projets pour la fonction aléatoire
+      const allProjectsData = await getProjectsForDashboard(0) // 0 = tous les projets
+
+      console.log('Tous les projets récupérés:', allProjectsData.length)
+
+      if (allProjectsData.length === 0) {
+        console.log('Aucun projet trouvé')
+        setAllProjects([])
+        setDashboardProjects([])
+        return
+      }
+
+      setAllProjects(allProjectsData)
+
+      // Sélectionner 3 projets aléatoires pour l'affichage
+      let displayProjects = allProjectsData
+      if (allProjectsData.length > 3) {
+        // Mélanger les projets et prendre les 3 premiers
+        displayProjects = [...allProjectsData].sort(() => 0.5 - Math.random()).slice(0, 3)
+      }
+
+      console.log('Dashboard projects received:', displayProjects)
+
+      // Vérifier que chaque projet a les informations nécessaires
+      displayProjects = displayProjects.map((project) => {
+        // S'assurer que progress est un nombre
+        if (typeof project.progress !== 'number') {
+          project.progress = 0
+        }
+
+        // S'assurer que tasks et completedTasks sont définis
+        if (typeof project.tasks !== 'number') {
+          project.tasks = 0
+        }
+
+        if (typeof project.completedTasks !== 'number') {
+          project.completedTasks = 0
+        }
+
+        return project
+      })
+
+      // Log task counts for each project
+      displayProjects.forEach((project) => {
+        console.log(
+          `Dashboard - Project ${project.title}: ${project.completedTasks}/${project.tasks} tasks, Progress: ${project.progress}%`,
+        )
+      })
+
+      setDashboardProjects(displayProjects)
+    } catch (error) {
+      console.error('Erreur lors de la récupération des projets pour le tableau de bord:', error)
+      // En cas d'erreur, définir des tableaux vides
+      setAllProjects([])
+      setDashboardProjects([])
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    // Connect to socket for real-time updates
+    socketService.connect()
+
+    // Récupérer les projets pour le tableau de bord
+    fetchDashboardProjects()
+
+    return () => {
+      // Clean up socket connection when component unmounts
+      socketService.disconnect()
+    }
+  }, [])
 
   return (
     <>
-      <WidgetsDropdown className="mb-4" />
-      <CCard className="mb-4">
-        <CCardBody>
-          <CRow>
-            <CCol sm={5}>
-              <h4 id="traffic" className="card-title mb-0">
-                Traffic
-              </h4>
-              <div className="small text-body-secondary">January - July 2023</div>
-            </CCol>
-            <CCol sm={7} className="d-none d-md-block">
-              <CButton color="primary" className="float-end">
-                <CIcon icon={cilCloudDownload} />
-              </CButton>
-              <CButtonGroup className="float-end me-3">
-                {['Day', 'Month', 'Year'].map((value) => (
-                  <CButton
-                    color="outline-secondary"
-                    key={value}
-                    className="mx-0"
-                    active={value === 'Month'}
-                  >
-                    {value}
-                  </CButton>
-                ))}
-              </CButtonGroup>
-            </CCol>
-          </CRow>
-          <MainChart />
-        </CCardBody>
-        <CCardFooter>
-          <CRow
-            xs={{ cols: 1, gutter: 4 }}
-            sm={{ cols: 2 }}
-            lg={{ cols: 4 }}
-            xl={{ cols: 5 }}
-            className="mb-2 text-center"
+      {/* Section Héro */}
+      <section
+        className="hero-section text-center py-5 text-white"
+        style={{
+          background: 'linear-gradient(135deg, #321fdb 0%, #1f67db 50%, #1f9adb 100%)',
+          borderRadius: '15px',
+          boxShadow: '0 10px 30px rgba(50, 31, 219, 0.25)',
+          margin: '0 15px 30px',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        {/* Cercles décoratifs */}
+        <div
+          className="circle-decoration"
+          style={{
+            position: 'absolute',
+            top: '-50px',
+            right: '-50px',
+            width: '200px',
+            height: '200px',
+            borderRadius: '50%',
+            background: 'rgba(255, 255, 255, 0.1)',
+            zIndex: 1,
+          }}
+        ></div>
+        <div
+          className="circle-decoration"
+          style={{
+            position: 'absolute',
+            bottom: '-30px',
+            left: '-30px',
+            width: '150px',
+            height: '150px',
+            borderRadius: '50%',
+            background: 'rgba(255, 255, 255, 0.1)',
+            zIndex: 1,
+          }}
+        ></div>
+
+        {/* Éléments décoratifs supplémentaires */}
+        <div
+          className="circle-decoration"
+          style={{
+            position: 'absolute',
+            top: '20%',
+            left: '10%',
+            width: '80px',
+            height: '80px',
+            borderRadius: '50%',
+            background: 'rgba(255, 255, 255, 0.05)',
+            zIndex: 1,
+          }}
+        ></div>
+        <div
+          className="circle-decoration"
+          style={{
+            position: 'absolute',
+            bottom: '20%',
+            right: '10%',
+            width: '120px',
+            height: '120px',
+            borderRadius: '50%',
+            background: 'rgba(255, 255, 255, 0.05)',
+            zIndex: 1,
+          }}
+        ></div>
+
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+          {/* Logo WorkTrack - Position centrée améliorée */}
+          <div
+            className="mb-4"
+            style={{
+              animation: 'fadeInUp 0.8s ease-out forwards',
+              marginBottom: '30px',
+            }}
           >
-            {progressExample.map((item, index, items) => (
-              <CCol
-                className={classNames({
-                  'd-none d-xl-block': index + 1 === items.length,
-                })}
-                key={index}
-              >
-                <div className="text-body-secondary">{item.title}</div>
-                <div className="fw-semibold text-truncate">
-                  {item.value} ({item.percent}%)
+            <img
+              src={worktrackLogo}
+              alt="WorkTrack Logo"
+              style={{
+                height: '130px',
+                filter: 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))',
+                transition: 'transform 0.3s ease',
+                cursor: 'pointer',
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
+              onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+            />
+          </div>
+
+          <h1
+            className="display-4 fw-bold"
+            style={{
+              textShadow: '0 2px 10px rgba(0, 0, 0, 0.2)',
+              letterSpacing: '0.5px',
+              marginBottom: '20px',
+            }}
+          >
+            Optimisez vos projets, anticipez les risques, <br />
+            <span
+              style={{
+                color: '#ffffff',
+                background: 'rgba(0, 0, 0, 0.2)',
+                padding: '0 15px',
+                borderRadius: '5px',
+              }}
+            >
+              réussissez en toute sérénité !
+            </span>
+          </h1>
+          <p
+            className="lead mt-4 mb-5"
+            style={{
+              maxWidth: '800px',
+              margin: '0 auto',
+              fontSize: '1.3rem',
+              lineHeight: '1.6',
+              textShadow: '0 1px 5px rgba(0, 0, 0, 0.15)',
+            }}
+          >
+            Notre plateforme utilise l'
+            <span style={{ fontWeight: 'bold', color: '#ffeb3b' }}>IA</span> pour vous aider à gérer
+            vos projets de manière efficace, en identifiant les risques et en optimisant vos
+            ressources.
+          </p>
+
+          <div
+            className="position-relative"
+            style={{
+              display: 'inline-block',
+              borderRadius: '15px',
+              overflow: 'hidden',
+              boxShadow: '0 15px 50px rgba(0, 0, 0, 0.3)',
+              transition: 'all 0.5s ease',
+              transform: 'perspective(1000px) rotateX(5deg)',
+              maxWidth: '85%',
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg)'
+              e.currentTarget.style.boxShadow = '0 20px 60px rgba(0, 0, 0, 0.4)'
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.transform = 'perspective(1000px) rotateX(5deg)'
+              e.currentTarget.style.boxShadow = '0 15px 50px rgba(0, 0, 0, 0.3)'
+            }}
+          >
+            <img
+              src={projectManagementImage}
+              alt="Illustration de gestion de projet"
+              className="img-fluid"
+              style={{
+                display: 'block',
+                borderRadius: '15px',
+              }}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                background: 'linear-gradient(to bottom, rgba(0,0,0,0) 80%, rgba(0,0,0,0.5) 100%)',
+                pointerEvents: 'none',
+              }}
+            ></div>
+          </div>
+        </div>
+      </section>
+
+      {/* Présentation des Fonctionnalités Clés */}
+      <section className="features-section py-5">
+        <div className="container">
+          <div className="text-center mb-5">
+            <h2 className="display-5 fw-bold">Fonctionnalités Clés</h2>
+            <p className="lead text-muted">
+              Découvrez comment notre plateforme peut transformer votre gestion de projet
+            </p>
+          </div>
+          <CRow className="g-4">
+            {[
+              {
+                icon: cilSpeedometer,
+                title: 'Planification intelligente',
+                description:
+                  'Utilisez nos outils avancés de planification avec vues Gantt, Kanban et gestion de Sprints pour organiser efficacement vos projets.',
+                color: 'primary',
+                image: 'planning.svg',
+              },
+              {
+                icon: cilTask,
+                title: 'Suivi des tâches et jalons',
+                description:
+                  "Suivez la progression de vos tâches en temps réel, définissez des jalons clés et recevez des notifications automatiques sur l'avancement.",
+                color: 'success',
+                image: 'tasks.svg',
+              },
+              {
+                icon: cilLightbulb,
+                title: "Prédiction des délais grâce à l'IA",
+                description:
+                  'Notre intelligence artificielle analyse vos données historiques pour prédire les délais réalistes et identifier les risques potentiels.',
+                color: 'warning',
+                image: 'ai.svg',
+              },
+              {
+                icon: cilSettings,
+                title: 'Optimisation des ressources',
+                description:
+                  'Gérez efficacement vos ressources humaines et matérielles, évitez la surcharge et maximisez la productivité de votre équipe.',
+                color: 'danger',
+                image: 'resources.svg',
+              },
+              {
+                icon: cilChatBubble,
+                title: 'Collaboration en équipe',
+                description:
+                  'Facilitez la communication avec messagerie intégrée, partage de documents et espaces de travail collaboratifs pour une meilleure synergie.',
+                color: 'info',
+                image: 'collaboration.svg',
+              },
+            ].map((feature, index) => (
+              <CCol key={index} md={6} lg={4} className="mb-4">
+                <div
+                  className="h-100 feature-card p-4 rounded-4 shadow-sm border-top border-4 hover-shadow transition-all"
+                  style={{
+                    borderColor: `var(--cui-${feature.color})`,
+                    backgroundColor: 'white',
+                    transition: 'all 0.3s ease',
+                  }}
+                >
+                  <div className="d-flex align-items-center mb-4">
+                    <div
+                      className={`feature-icon-container d-flex align-items-center justify-content-center rounded-circle bg-${feature.color} bg-opacity-10 p-3 me-3`}
+                      style={{ width: '60px', height: '60px' }}
+                    >
+                      <CIcon icon={feature.icon} size="xl" className={`text-${feature.color}`} />
+                    </div>
+                    <h4 className="fw-bold mb-0">{feature.title}</h4>
+                  </div>
+                  <p className="text-muted mb-4">{feature.description}</p>
+                  <div className="text-center mt-auto">
+                    <img
+                      src={`/assets/images/features/${feature.image}`}
+                      alt={feature.title}
+                      className="img-fluid feature-image mb-3"
+                      style={{ maxHeight: '120px', opacity: '0.9' }}
+                      onError={(e) => {
+                        e.target.style.display = 'none'
+                      }}
+                    />
+                    <div>
+                      <CButton
+                        color={feature.color}
+                        variant="outline"
+                        href="/features"
+                        className="fw-bold mt-2"
+                      >
+                        En savoir plus
+                        <CIcon icon={cilArrowRight} className="ms-2" />
+                      </CButton>
+                    </div>
+                  </div>
                 </div>
-                <CProgress thin className="mt-2" color={item.color} value={item.percent} />
               </CCol>
             ))}
           </CRow>
-        </CCardFooter>
-      </CCard>
-      <WidgetsBrand className="mb-4" withCharts />
-      <CRow>
-        <CCol xs>
-          <CCard className="mb-4">
-            <CCardHeader>Traffic {' & '} Sales</CCardHeader>
-            <CCardBody>
-              <CRow>
-                <CCol xs={12} md={6} xl={6}>
-                  <CRow>
-                    <CCol xs={6}>
-                      <div className="border-start border-start-4 border-start-info py-1 px-3">
-                        <div className="text-body-secondary text-truncate small">New Clients</div>
-                        <div className="fs-5 fw-semibold">9,123</div>
+        </div>
+      </section>
+
+      {/* Section "Comment ça marche ?" */}
+      <section className="how-it-works-section py-5 bg-light">
+        <div className="container">
+          <h2 className="text-center mb-5 fw-bold">Comment ça marche ?</h2>
+          <CRow className="text-center">
+            {[
+              { step: '1', title: 'Créez votre projet', icon: '📋' },
+              { step: '2', title: 'Ajoutez vos équipes et tâches', icon: '👥' },
+              { step: '3', title: 'Suivez les performances et optimisez', icon: '📊' },
+            ].map((step, index) => (
+              <CCol key={index} md={4} className="mb-4">
+                <div className="step-icon display-4 text-primary">{step.icon}</div>
+                <h5 className="mt-3 fw-bold">{step.title}</h5>
+              </CCol>
+            ))}
+          </CRow>
+        </div>
+      </section>
+
+      {/* Dashboard Widgets */}
+      <WidgetsDropdown className="mb-4" />
+
+      <section className="dashboard-section">
+        <div className="section-header">
+          <h2 className="section-title">
+            <CIcon icon={cilChart} className="icon" />
+            Activité du projet
+          </h2>
+        </div>
+        <CRow>
+          <CCol md={12}>
+            <CCard className="dashboard-card">
+              <CCardBody>
+                <MainChart />
+              </CCardBody>
+            </CCard>
+          </CCol>
+        </CRow>
+      </section>
+
+      {/* Section Projets */}
+      <section className="dashboard-section">
+        <div className="section-header">
+          <h2 className="section-title">
+            <CIcon icon={cilFolder} className="icon" />
+            Vos projets en cours
+          </h2>
+          <div className="d-flex gap-2">
+            <button
+              onClick={selectRandomProjects}
+              disabled={allProjects.length === 0}
+              className="btn-dashboard btn-success"
+              title="Sélectionner un projet aléatoire"
+            >
+              Aléatoire
+            </button>
+            <Link to="/projects" className="btn-dashboard btn-outline">
+              Tous les projets
+              <CIcon icon={cilArrowRight} style={{ marginLeft: '6px' }} size="sm" />
+            </Link>
+          </div>
+        </div>
+        <CRow>
+          <CCol md={12}>
+            <CCard className="dashboard-card">
+              <CCardBody>
+                <CRow>
+                  {loading ? (
+                    <CCol xs={12} className="text-center py-5">
+                      <div
+                        className="spinner-grow text-primary mb-3"
+                        style={{ width: '3rem', height: '3rem' }}
+                        role="status"
+                      >
+                        <span className="visually-hidden">Chargement...</span>
                       </div>
+                      <p className="text-muted">Chargement des projets en cours...</p>
                     </CCol>
-                    <CCol xs={6}>
-                      <div className="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
-                        <div className="text-body-secondary text-truncate small">
-                          Recurring Clients
-                        </div>
-                        <div className="fs-5 fw-semibold">22,643</div>
+                  ) : dashboardProjects.length === 0 ? (
+                    <CCol xs={12} className="text-center py-5">
+                      <div className="empty-state mb-3">
+                        <CIcon
+                          icon={cilFolder}
+                          style={{ width: '4rem', height: '4rem', opacity: '0.5' }}
+                        />
                       </div>
+                      <h5 className="text-muted mb-3">Aucun projet à afficher</h5>
+                      <p className="text-muted mb-4">
+                        Commencez par créer votre premier projet pour le voir apparaître ici.
+                      </p>
+                      <Link to="/projects/create" className="btn btn-primary">
+                        <CIcon icon={cilTask} className="me-2" />
+                        Créer un nouveau projet
+                      </Link>
                     </CCol>
-                  </CRow>
-                  <hr className="mt-0" />
-                  {progressGroupExample1.map((item, index) => (
-                    <div className="progress-group mb-4" key={index}>
-                      <div className="progress-group-prepend">
-                        <span className="text-body-secondary small">{item.title}</span>
-                      </div>
-                      <div className="progress-group-bars">
-                        <CProgress thin color="info" value={item.value1} />
-                        <CProgress thin color="danger" value={item.value2} />
-                      </div>
-                    </div>
-                  ))}
-                </CCol>
-                <CCol xs={12} md={6} xl={6}>
-                  <CRow>
-                    <CCol xs={6}>
-                      <div className="border-start border-start-4 border-start-warning py-1 px-3 mb-3">
-                        <div className="text-body-secondary text-truncate small">Pageviews</div>
-                        <div className="fs-5 fw-semibold">78,623</div>
-                      </div>
-                    </CCol>
-                    <CCol xs={6}>
-                      <div className="border-start border-start-4 border-start-success py-1 px-3 mb-3">
-                        <div className="text-body-secondary text-truncate small">Organic</div>
-                        <div className="fs-5 fw-semibold">49,123</div>
-                      </div>
-                    </CCol>
-                  </CRow>
+                  ) : (
+                    dashboardProjects.map((project, index) => (
+                      <CCol xs={12} sm={6} lg={4} key={index} className="mb-4">
+                        <div className="project-card card-hover-effect">
+                          <div className="project-card-header">
+                            <h5 className="project-card-title text-truncate" title={project.title}>
+                              <CIcon icon={cilFolder} className="icon" />
+                              {project.title}
+                            </h5>
+                            <CBadge color={project.statusColor} shape="rounded-pill">
+                              {project.status}
+                            </CBadge>
+                          </div>
 
-                  <hr className="mt-0" />
+                          <div className="project-card-content">
+                            <div className="d-flex justify-content-between mb-1 align-items-center">
+                              <span className="fw-semibold">Progression</span>
+                            </div>
 
-                  {progressGroupExample2.map((item, index) => (
-                    <div className="progress-group mb-4" key={index}>
-                      <div className="progress-group-header">
-                        <CIcon className="me-2" icon={item.icon} size="lg" />
-                        <span>{item.title}</span>
-                        <span className="ms-auto fw-semibold">{item.value}%</span>
-                      </div>
-                      <div className="progress-group-bars">
-                        <CProgress thin color="warning" value={item.value} />
-                      </div>
-                    </div>
-                  ))}
+                            <div className="progress-container">
+                              <CProgress
+                                value={project.progress || 0}
+                                color={
+                                  (project.progress || 0) > 75
+                                    ? 'success'
+                                    : (project.progress || 0) > 40
+                                      ? 'primary'
+                                      : 'warning'
+                                }
+                                height={12}
+                                className="progress-bar"
+                              />
+                              <div
+                                className="progress-label"
+                                style={{
+                                  backgroundColor:
+                                    (project.progress || 0) > 75
+                                      ? 'var(--success-color)'
+                                      : (project.progress || 0) > 40
+                                        ? 'var(--primary-color)'
+                                        : 'var(--warning-color)',
+                                }}
+                              >
+                                {project.progress || 0}%
+                              </div>
+                            </div>
 
-                  <div className="mb-5"></div>
+                            <div className="project-stats">
+                              <div className="stat-item">
+                                <div className="stat-icon tasks">
+                                  <CIcon icon={cilTask} size="sm" />
+                                </div>
+                                <div>
+                                  <div className="stat-label">Tâches</div>
+                                  <div className="stat-value">
+                                    {project.completedTasks !== undefined
+                                      ? project.completedTasks
+                                      : 0}
+                                    /{project.tasks !== undefined ? project.tasks : 0}
+                                  </div>
+                                </div>
+                              </div>
 
-                  {progressGroupExample3.map((item, index) => (
-                    <div className="progress-group" key={index}>
-                      <div className="progress-group-header">
-                        <CIcon className="me-2" icon={item.icon} size="lg" />
-                        <span>{item.title}</span>
-                        <span className="ms-auto fw-semibold">
-                          {item.value}{' '}
-                          <span className="text-body-secondary small">({item.percent}%)</span>
-                        </span>
-                      </div>
-                      <div className="progress-group-bars">
-                        <CProgress thin color="success" value={item.percent} />
-                      </div>
-                    </div>
-                  ))}
-                </CCol>
-              </CRow>
+                              <div className="stat-item">
+                                <div className="stat-icon deadline">
+                                  <CIcon icon={cilCalendar} size="sm" />
+                                </div>
+                                <div>
+                                  <div className="stat-label">Échéance</div>
+                                  <div className="stat-value">{project.dueDate}</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
 
-              <br />
-
-              <CTable align="middle" className="mb-0 border" hover responsive>
-                <CTableHead className="text-nowrap">
-                  <CTableRow>
-                    <CTableHeaderCell className="bg-body-tertiary text-center">
-                      <CIcon icon={cilPeople} />
-                    </CTableHeaderCell>
-                    <CTableHeaderCell className="bg-body-tertiary">User</CTableHeaderCell>
-                    <CTableHeaderCell className="bg-body-tertiary text-center">
-                      Country
-                    </CTableHeaderCell>
-                    <CTableHeaderCell className="bg-body-tertiary">Usage</CTableHeaderCell>
-                    <CTableHeaderCell className="bg-body-tertiary text-center">
-                      Payment Method
-                    </CTableHeaderCell>
-                    <CTableHeaderCell className="bg-body-tertiary">Activity</CTableHeaderCell>
-                  </CTableRow>
-                </CTableHead>
-                <CTableBody>
-                  {tableExample.map((item, index) => (
-                    <CTableRow v-for="item in tableItems" key={index}>
-                      <CTableDataCell className="text-center">
-                        <CAvatar size="md" src={item.avatar.src} status={item.avatar.status} />
-                      </CTableDataCell>
-                      <CTableDataCell>
-                        <div>{item.user.name}</div>
-                        <div className="small text-body-secondary text-nowrap">
-                          <span>{item.user.new ? 'New' : 'Recurring'}</span> | Registered:{' '}
-                          {item.user.registered}
-                        </div>
-                      </CTableDataCell>
-                      <CTableDataCell className="text-center">
-                        <CIcon size="xl" icon={item.country.flag} title={item.country.name} />
-                      </CTableDataCell>
-                      <CTableDataCell>
-                        <div className="d-flex justify-content-between text-nowrap">
-                          <div className="fw-semibold">{item.usage.value}%</div>
-                          <div className="ms-3">
-                            <small className="text-body-secondary">{item.usage.period}</small>
+                          <div className="project-card-footer">
+                            <Link
+                              to={`/projects/${project.id}`}
+                              className="btn-dashboard btn-primary"
+                            >
+                              <CIcon icon={cilArrowRight} className="me-2" size="sm" />
+                              Voir détails du projet
+                            </Link>
                           </div>
                         </div>
-                        <CProgress thin color={item.usage.color} value={item.usage.value} />
-                      </CTableDataCell>
-                      <CTableDataCell className="text-center">
-                        <CIcon size="xl" icon={item.payment.icon} />
-                      </CTableDataCell>
-                      <CTableDataCell>
-                        <div className="small text-body-secondary text-nowrap">Last login</div>
-                        <div className="fw-semibold text-nowrap">{item.activity}</div>
-                      </CTableDataCell>
-                    </CTableRow>
-                  ))}
-                </CTableBody>
-              </CTable>
-            </CCardBody>
-          </CCard>
-        </CCol>
-      </CRow>
+                      </CCol>
+                    ))
+                  )}
+                </CRow>
+              </CCardBody>
+            </CCard>
+          </CCol>
+        </CRow>
+      </section>
+
+      {/* Section Activités, Événements et Équipe */}
+      <section className="dashboard-section">
+        <div className="section-header">
+          <h2 className="section-title">
+            <CIcon icon={cilPeople} className="icon" />
+            Activités, Événements et Équipe
+          </h2>
+        </div>
+
+        <CRow>
+          {/* Activités récentes */}
+          <CCol md={4} className="mb-4">
+            <RecentActivityListWidget limit={5} />
+          </CCol>
+
+          {/* Événements à venir */}
+          <CCol md={4} className="mb-4">
+            <UpcomingEvents />
+          </CCol>
+
+          {/* Membres de l'équipe */}
+          <CCol md={4} className="mb-4">
+            <TeamMembersWidget />
+          </CCol>
+        </CRow>
+      </section>
+
+      {/* Section Tarification */}
+      <section className="dashboard-section">
+        <div className="section-header">
+          <h2 className="section-title">
+            <CIcon icon={cilSettings} className="icon" />
+            Tarification
+          </h2>
+        </div>
+
+        <div className="text-center mb-4">
+          <p className="lead">Choisissez le plan qui correspond à vos besoins</p>
+        </div>
+
+        <CRow className="justify-content-center">
+          {[
+            {
+              plan: 'Gratuit',
+              price: '0 DT',
+              period: 'pour toujours',
+              popular: false,
+              color: 'info',
+              features: [
+                "Jusqu'à 3 projets",
+                "Jusqu'à 5 utilisateurs",
+                'Fonctionnalités de base',
+                'Support communautaire',
+                'Mises à jour gratuites',
+              ],
+            },
+            {
+              plan: 'Standard',
+              price: '10 DT',
+              period: 'par mois',
+              popular: true,
+              color: 'primary',
+              features: [
+                'Projets illimités',
+                "Jusqu'à 20 utilisateurs",
+                'Fonctionnalités avancées',
+                'Support par email',
+                'Analyses de performance',
+                "Intégration avec d'autres outils",
+              ],
+            },
+            {
+              plan: 'Premium',
+              price: '20 DT',
+              period: 'par mois',
+              popular: false,
+              color: 'dark',
+              features: [
+                'Projets illimités',
+                'Utilisateurs illimités',
+                'Toutes les fonctionnalités',
+                'Support prioritaire 24/7',
+                'Analyses avancées avec IA',
+                'API complète',
+                'Personnalisation avancée',
+              ],
+            },
+          ].map((pricing, index) => (
+            <CCol key={index} md={4} className="mb-4">
+              <div
+                className={`project-card card-hover-effect ${pricing.popular ? 'border-primary' : ''}`}
+                style={{
+                  transform: pricing.popular ? 'scale(1.05)' : 'scale(1)',
+                  zIndex: pricing.popular ? 1 : 0,
+                }}
+              >
+                {pricing.popular && (
+                  <div className="position-relative">
+                    <CBadge
+                      color="primary"
+                      shape="rounded-pill"
+                      className="position-absolute top-0 start-50 translate-middle px-3 py-2 fw-bold"
+                    >
+                      RECOMMANDÉ
+                    </CBadge>
+                  </div>
+                )}
+
+                <div
+                  className="project-card-header text-center"
+                  style={{
+                    backgroundColor: `var(--${pricing.color === 'dark' ? 'dark' : pricing.color === 'primary' ? 'primary' : 'info'}-color)`,
+                    color: 'white',
+                    padding: 'var(--spacing-sm)',
+                  }}
+                >
+                  <h4 className="fw-bold mb-0">{pricing.plan}</h4>
+                </div>
+
+                <div className="project-card-content text-center">
+                  <div className="mb-4">
+                    <span className="display-4 fw-bold">{pricing.price}</span>
+                    <span className="text-muted fs-5">{pricing.period}</span>
+                  </div>
+
+                  <ul className="list-unstyled mb-4">
+                    {pricing.features.map((feature, i) => (
+                      <li key={i} className="py-2 d-flex align-items-center">
+                        <CIcon
+                          icon={cilCheck}
+                          className="me-2"
+                          style={{
+                            width: '1rem',
+                            height: '1rem',
+                            color: `var(--${pricing.color === 'dark' ? 'dark' : pricing.color === 'primary' ? 'primary' : 'info'}-color)`,
+                          }}
+                        />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="project-card-footer">
+                  <Link
+                    to="/pricing"
+                    className={`btn-dashboard ${pricing.popular ? 'btn-primary' : pricing.color === 'dark' ? 'btn-outline' : 'btn-outline'}`}
+                    style={{ width: '100%' }}
+                  >
+                    {pricing.popular
+                      ? 'Essai gratuit de 14 jours'
+                      : pricing.plan === 'Gratuit'
+                        ? 'Commencer gratuitement'
+                        : 'Contacter les ventes'}
+                  </Link>
+                </div>
+              </div>
+            </CCol>
+          ))}
+        </CRow>
+
+        <div className="text-center mt-4">
+          <p className="text-muted mb-2">
+            Besoin d'une solution personnalisée pour votre entreprise ?
+          </p>
+          <Link to="/contact" className="btn-dashboard btn-outline">
+            Contactez notre équipe commerciale
+          </Link>
+        </div>
+      </section>
     </>
   )
 }
-
 export default Dashboard

@@ -1,0 +1,105 @@
+.react-calendar__tile.highlight {
+  background-color: #007bff;
+  color: white;
+  border-radius: 50%;
+}
+
+.task-table {
+  flex: 2;
+  min-width: 300px;
+}
+
+.task-calendar {
+  flex: 1;
+  min-width: 300px;
+}
+
+.task-calendar .react-calendar {
+  width: 100%;
+  max-width: 400px;
+}
+
+.task-date {
+  font-size: 0.8rem;
+  text-align: center;
+  border-radius: 4px;
+  padding: 2px;
+  margin-top: 2px;
+}
+
+.task-date-high {
+  background-color: red !important;
+}
+
+.task-date-medium {
+  background-color: orange !important;
+}
+
+.task-date-low {
+  background-color: green !important;
+}
+
+.task-highlight {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border-radius: 50%;
+}
+
+.task-high {
+  background-color: red;
+}
+
+.task-medium {
+  background-color: orange;
+}
+
+.task-low {
+  background-color: green;
+}
+
+.task-date-default {
+  background-color: lightgray !important;
+}
+
+.task-priority-high {
+  color: red;
+  font-weight: bold;
+}
+
+.task-priority-medium {
+  color: orange;
+}
+
+.task-priority-low {
+  color: green;
+}
+
+.task-priority-default {
+  color: black;
+}
+
+.calendar-legend {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+
+.legend-item {
+  font-size: 0.9rem;
+  padding: 5px 10px;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.legend-item.high {
+  background-color: red;
+}
+
+.legend-item.medium {
+  background-color: orange;
+}
+
+.legend-item.low {
+  background-color: green;
+}

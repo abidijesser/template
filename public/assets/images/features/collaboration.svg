@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200px" height="150px" viewBox="0 0 200 150" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Collaboration</title>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="#EFF6FF" x="0" y="0" width="200" height="150" rx="8"></rect>
+        <circle fill="#0EA5E9" opacity="0.2" cx="60" cy="50" r="20"></circle>
+        <circle fill="#0EA5E9" opacity="0.2" cx="140" cy="50" r="20"></circle>
+        <circle fill="#0EA5E9" opacity="0.2" cx="100" cy="100" r="20"></circle>
+        <path d="M60,50 L100,100" stroke="#0EA5E9" stroke-width="2" stroke-linecap="round" stroke-dasharray="4,4"></path>
+        <path d="M140,50 L100,100" stroke="#0EA5E9" stroke-width="2" stroke-linecap="round" stroke-dasharray="4,4"></path>
+        <path d="M60,50 L140,50" stroke="#0EA5E9" stroke-width="2" stroke-linecap="round" stroke-dasharray="4,4"></path>
+        <circle stroke="#0EA5E9" stroke-width="2" fill="#FFFFFF" cx="60" cy="50" r="10"></circle>
+        <circle stroke="#0EA5E9" stroke-width="2" fill="#FFFFFF" cx="140" cy="50" r="10"></circle>
+        <circle stroke="#0EA5E9" stroke-width="2" fill="#FFFFFF" cx="100" cy="100" r="10"></circle>
+    </g>
+</svg>

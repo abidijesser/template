@@ -1,0 +1,39 @@
+.media-card-preview {
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.media-preview-img {
+  max-height: 160px;
+  object-fit: contain;
+}
+
+.media-type-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  color: #6c757d;
+}
+
+.preview-container {
+  height: 200px;
+  background-color: #f8f9fa;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .media-card-preview {
+    height: 120px;
+  }
+  
+  .media-preview-img {
+    max-height: 120px;
+  }
+}

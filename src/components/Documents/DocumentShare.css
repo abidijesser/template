@@ -1,0 +1,65 @@
+.share-link-input {
+  font-size: 0.875rem;
+  background-color: #f8f9fa;
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.share-link-card {
+  margin-bottom: 1rem;
+  border-left: 3px solid #321fdb;
+}
+
+.share-link-card .card-header {
+  background-color: #f8f9fa;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.share-link-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.share-link-info-item {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  color: #768192;
+}
+
+.share-link-info-item svg {
+  margin-right: 0.25rem;
+}
+
+.share-link-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Styles pour le formulaire d'email */
+.email-form {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  margin-top: 1rem;
+}
+
+/* Animation pour le bouton de copie */
+@keyframes copy-success {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.copy-success {
+  animation: copy-success 0.3s ease-in-out;
+  color: #2eb85c;
+}
+
+

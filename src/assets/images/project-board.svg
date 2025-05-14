@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background elements -->
+  <circle cx="50" cy="250" r="100" fill="#F0F4FF" opacity="0.5"/>
+  <circle cx="350" cy="50" r="80" fill="#F0F4FF" opacity="0.3"/>
+  
+  <!-- Project board -->
+  <rect x="80" y="60" width="240" height="180" rx="12" fill="#F0F4FF" stroke="#E0E6FF" stroke-width="2"/>
+  
+  <!-- Board header -->
+  <rect x="80" y="60" width="240" height="36" rx="12" fill="#4361EE"/>
+  <rect x="80" y="84" width="240" height="12" rx="0" fill="#4361EE"/>
+  
+  <!-- Column titles -->
+  <text x="120" y="82" font-family="Arial" font-size="12" font-weight="600" fill="white">To Do</text>
+  <text x="200" y="82" font-family="Arial" font-size="12" font-weight="600" fill="white">In Progress</text>
+  <text x="280" y="82" font-family="Arial" font-size="12" font-weight="600" fill="white">Testing</text>
+  
+  <!-- Column dividers -->
+  <line x1="160" y1="60" x2="160" y2="240" stroke="#E0E6FF" stroke-width="1"/>
+  <line x1="240" y1="60" x2="240" y2="240" stroke="#E0E6FF" stroke-width="1"/>
+  
+  <!-- Task cards in To Do column -->
+  <rect x="90" y="110" width="60" height="24" rx="4" fill="white" stroke="#E0E6FF" stroke-width="1"/>
+  <rect x="90" y="144" width="60" height="24" rx="4" fill="white" stroke="#E0E6FF" stroke-width="1"/>
+  <rect x="90" y="178" width="60" height="24" rx="4" fill="white" stroke="#E0E6FF" stroke-width="1"/>
+  <rect x="90" y="212" width="60" height="24" rx="4" fill="white" stroke="#E0E6FF" stroke-width="1"/>
+  
+  <!-- Task cards in In Progress column -->
+  <rect x="170" y="110" width="60" height="24" rx="4" fill="white" stroke="#E0E6FF" stroke-width="1"/>
+  <rect x="170" y="144" width="60" height="24" rx="4" fill="white" stroke="#E0E6FF" stroke-width="1"/>
+  <rect x="170" y="178" width="60" height="24" rx="4" fill="white" stroke="#E0E6FF" stroke-width="1"/>
+  
+  <!-- Task cards in Testing column -->
+  <rect x="250" y="110" width="60" height="24" rx="4" fill="white" stroke="#E0E6FF" stroke-width="1"/>
+  <rect x="250" y="144" width="60" height="24" rx="4" fill="white" stroke="#E0E6FF" stroke-width="1"/>
+  
+  <!-- Person 1 -->
+  <circle cx="40" cy="100" r="20" fill="#4361EE" opacity="0.2"/>
+  <path d="M40 90 Q45 85 50 90 Q55 95 50 100 Q45 105 40 100 Q35 95 40 90" fill="#4361EE"/>
+  <circle cx="40" cy="80" r="10" fill="#4361EE"/>
+  <rect x="30" y="90" width="20" height="25" rx="5" fill="#4361EE"/>
+  
+  <!-- Person 2 -->
+  <circle cx="340" cy="200" r="20" fill="#FF5252" opacity="0.2"/>
+  <path d="M340 190 Q345 185 350 190 Q355 195 350 200 Q345 205 340 200 Q335 195 340 190" fill="#FF5252"/>
+  <circle cx="340" cy="180" r="10" fill="#FF5252"/>
+  <rect x="330" y="190" width="20" height="25" rx="5" fill="#FF5252"/>
+  
+  <!-- Chart -->
+  <rect x="30" y="220" width="80" height="40" rx="4" fill="white" stroke="#E0E6FF" stroke-width="1"/>
+  <polyline points="40,250 55,235 70,245 85,220" stroke="#4361EE" stroke-width="2" fill="none"/>
+  <circle cx="40" cy="250" r="3" fill="#4361EE"/>
+  <circle cx="55" cy="235" r="3" fill="#4361EE"/>
+  <circle cx="70" cy="245" r="3" fill="#4361EE"/>
+  <circle cx="85" cy="220" r="3" fill="#4361EE"/>
+  
+  <!-- Task squares -->
+  <rect x="320" y="120" width="30" height="30" rx="4" fill="#4361EE" opacity="0.2"/>
+  <rect x="330" y="130" width="10" height="10" rx="2" fill="#4361EE"/>
+  
+  <rect x="50" y="170" width="25" height="25" rx="4" fill="#FF5252" opacity="0.2"/>
+  <rect x="58" y="178" width="8" height="8" rx="2" fill="#FF5252"/>
+  
+  <!-- Arrow -->
+  <path d="M350 250 L380 250 L370 240 M380 250 L370 260" stroke="#4361EE" stroke-width="2" fill="none"/>
+</svg>

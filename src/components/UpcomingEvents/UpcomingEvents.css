@@ -1,0 +1,44 @@
+.upcoming-events {
+  display: flex;
+  flex-direction: column;
+}
+
+.event-item {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.event-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.event-item h5 {
+  font-weight: 600;
+  color: #333;
+  font-size: 1rem;
+}
+
+.event-item p {
+  font-size: 0.9rem;
+}
+
+.event-item .badge {
+  font-size: 0.75rem;
+  padding: 0.35em 0.65em;
+}
+
+/* Border colors */
+.border-danger {
+  border-color: #e55353 !important;
+}
+
+.border-warning {
+  border-color: #f9b115 !important;
+}
+
+.border-info {
+  border-color: #39f !important;
+}

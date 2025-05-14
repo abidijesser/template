@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background elements -->
+  <circle cx="50" cy="250" r="100" fill="#F0F4FF" opacity="0.5"/>
+  <circle cx="350" cy="50" r="80" fill="#F0F4FF" opacity="0.3"/>
+  
+  <!-- Main workspace -->
+  <rect x="80" y="60" width="240" height="180" rx="12" fill="#F0F4FF" stroke="#E0E6FF" stroke-width="2"/>
+  
+  <!-- Workspace header -->
+  <rect x="80" y="60" width="240" height="36" rx="12" fill="#4361EE"/>
+  <rect x="80" y="84" width="240" height="12" rx="0" fill="#4361EE"/>
+  
+  <!-- Header title -->
+  <text x="120" y="82" font-family="Arial" font-size="12" font-weight="600" fill="white">Team Collaboration</text>
+  
+  <!-- Person 1 (left) -->
+  <circle cx="120" cy="140" r="25" fill="#4361EE" opacity="0.2"/>
+  <circle cx="120" cy="120" r="12" fill="#4361EE"/>
+  <rect x="108" y="132" width="24" height="30" rx="6" fill="#4361EE"/>
+  
+  <!-- Person 2 (center) -->
+  <circle cx="200" cy="140" r="25" fill="#FF5252" opacity="0.2"/>
+  <circle cx="200" cy="120" r="12" fill="#FF5252"/>
+  <rect x="188" y="132" width="24" height="30" rx="6" fill="#FF5252"/>
+  
+  <!-- Person 3 (right) -->
+  <circle cx="280" cy="140" r="25" fill="#33D69F" opacity="0.2"/>
+  <circle cx="280" cy="120" r="12" fill="#33D69F"/>
+  <rect x="268" y="132" width="24" height="30" rx="6" fill="#33D69F"/>
+  
+  <!-- Connection lines -->
+  <line x1="145" y1="140" x2="175" y2="140" stroke="#4361EE" stroke-width="2" stroke-dasharray="4 2"/>
+  <line x1="225" y1="140" x2="255" y2="140" stroke="#4361EE" stroke-width="2" stroke-dasharray="4 2"/>
+  
+  <!-- Document 1 -->
+  <rect x="110" y="180" width="40" height="50" rx="4" fill="white" stroke="#E0E6FF" stroke-width="1"/>
+  <line x1="120" y1="190" x2="140" y2="190" stroke="#4361EE" stroke-width="2"/>
+  <line x1="120" y1="200" x2="140" y2="200" stroke="#4361EE" stroke-width="2"/>
+  <line x1="120" y1="210" x2="130" y2="210" stroke="#4361EE" stroke-width="2"/>
+  
+  <!-- Document 2 -->
+  <rect x="180" y="180" width="40" height="50" rx="4" fill="white" stroke="#E0E6FF" stroke-width="1"/>
+  <line x1="190" y1="190" x2="210" y2="190" stroke="#FF5252" stroke-width="2"/>
+  <line x1="190" y1="200" x2="210" y2="200" stroke="#FF5252" stroke-width="2"/>
+  <line x1="190" y1="210" x2="200" y2="210" stroke="#FF5252" stroke-width="2"/>
+  
+  <!-- Document 3 -->
+  <rect x="250" y="180" width="40" height="50" rx="4" fill="white" stroke="#E0E6FF" stroke-width="1"/>
+  <line x1="260" y1="190" x2="280" y2="190" stroke="#33D69F" stroke-width="2"/>
+  <line x1="260" y1="200" x2="280" y2="200" stroke="#33D69F" stroke-width="2"/>
+  <line x1="260" y1="210" x2="270" y2="210" stroke="#33D69F" stroke-width="2"/>
+  
+  <!-- Chat bubbles -->
+  <path d="M130 100 Q135 95 140 100 L140 110 Q135 115 130 110 Z" fill="white" stroke="#4361EE" stroke-width="1"/>
+  <path d="M210 100 Q215 95 220 100 L220 110 Q215 115 210 110 Z" fill="white" stroke="#FF5252" stroke-width="1"/>
+  <path d="M290 100 Q295 95 300 100 L300 110 Q295 115 290 110 Z" fill="white" stroke="#33D69F" stroke-width="1"/>
+  
+  <!-- Small decorative elements -->
+  <circle cx="40" cy="100" r="15" fill="#4361EE" opacity="0.1"/>
+  <circle cx="360" cy="200" r="15" fill="#FF5252" opacity="0.1"/>
+  <rect x="30" cy="150" width="20" height="20" rx="4" fill="#33D69F" opacity="0.1"/>
+  <rect x="350" cy="120" width="20" height="20" rx="4" fill="#4361EE" opacity="0.1"/>
+</svg>

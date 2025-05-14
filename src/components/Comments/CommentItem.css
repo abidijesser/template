@@ -1,0 +1,27 @@
+.comment-item {
+  border-left: 3px solid #3c4b64;
+  transition: all 0.2s ease;
+}
+
+.comment-item:hover {
+  border-left-color: #321fdb;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.comment-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-author {
+  font-size: 1rem;
+}
+
+.comment-date {
+  font-size: 0.8rem;
+}
+
+.comment-content {
+  white-space: pre-wrap;
+  word-break: break-word;
+}

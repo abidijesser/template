@@ -1,0 +1,158 @@
+.resources-page {
+  padding-bottom: 2rem;
+}
+
+.document-item {
+  border-radius: 0.25rem;
+  border: 1px solid #eee;
+  transition: all 0.2s ease;
+  margin-bottom: 0.75rem !important;
+  padding: 0.75rem !important;
+}
+
+.document-item:hover {
+  background-color: #f8f9fa;
+  cursor: pointer;
+  border-color: #dee2e6;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.document-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  border-radius: 4px;
+  background-color: #f8f9fa;
+  padding: 6px;
+}
+
+.document-name {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.document-meta {
+  margin-top: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+/* Styles pour les icônes de fichiers par type */
+.file-icon {
+  color: #6c757d;
+}
+
+.file-icon-pdf {
+  color: #dc3545;
+}
+
+.file-icon-doc,
+.file-icon-docx,
+.file-icon-txt {
+  color: #0d6efd;
+}
+
+.file-icon-xls,
+.file-icon-xlsx,
+.file-icon-csv {
+  color: #198754;
+}
+
+.file-icon-ppt,
+.file-icon-pptx {
+  color: #fd7e14;
+}
+
+.file-icon-jpg,
+.file-icon-jpeg,
+.file-icon-png,
+.file-icon-gif {
+  color: #0dcaf0;
+}
+
+.file-icon-mp4,
+.file-icon-avi,
+.file-icon-mov {
+  color: #6f42c1;
+}
+
+.file-icon-zip,
+.file-icon-rar {
+  color: #6c757d;
+}
+
+.documents-header {
+  font-weight: bold;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.document-details h3 {
+  display: flex;
+  align-items: center;
+}
+
+.selected-files {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Styles for filter elements */
+.filter-active {
+  border-color: #2eb85c !important;
+  box-shadow: 0 0 0 0.2rem rgba(46, 184, 92, 0.25) !important;
+}
+
+.filter-badge {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  margin-left: 0.5rem;
+  border-radius: 1rem;
+}
+
+.filter-dropdown-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filter-dropdown-item.active {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
+
+.filter-count {
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-clear-button {
+  transition: all 0.2s ease;
+}
+
+.filter-clear-button:hover {
+  transform: scale(1.05);
+}
+
+/* Improve document list appearance */
+.documents-list {
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.documents-header {
+  background-color: #f8f9fa;
+  padding: 0.75rem !important;
+  font-weight: 600;
+  color: #495057;
+}

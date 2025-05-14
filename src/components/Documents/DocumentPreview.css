@@ -1,0 +1,58 @@
+.document-preview-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.document-preview-card .card-body {
+  flex: 1;
+  overflow: hidden;
+}
+
+.document-viewer {
+  height: 100%;
+  width: 100%;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.non-previewable-file {
+  padding: 2rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px dashed #ccc;
+}
+
+/* Personnalisation du visualiseur de documents */
+.react-pdf__Document {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.react-pdf__Page {
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles pour les contrôles de navigation */
+.doc-viewer-navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+.doc-viewer-navigation button {
+  margin: 0 0.5rem;
+}
+
+.doc-viewer-navigation .page-info {
+  margin: 0 1rem;
+  font-size: 0.9rem;
+  color: #6c757d;
+}

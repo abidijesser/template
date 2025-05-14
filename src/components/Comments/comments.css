@@ -1,0 +1,57 @@
+.comment-content {
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.5;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.list-group-item {
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+.list-group-item:hover {
+  background-color: #f8f9fa;
+}
+
+.avatar {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Animation for new comments */
+@keyframes highlight {
+  0% {
+    background-color: rgba(0, 123, 255, 0.1);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.new-comment {
+  animation: highlight 2s ease-out;
+}
+
+/* Comment form styling */
+.comment-form {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.comment-textarea {
+  border-radius: 8px;
+  resize: none;
+  transition: all 0.2s ease;
+}
+
+.comment-textarea:focus {
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+  border-color: #86b7fe;
+}
+
+/* Improve spacing between comments */
+.list-group-item + .list-group-item {
+  margin-top: 0.5rem;
+}
