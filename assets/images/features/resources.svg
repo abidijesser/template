@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200px" height="150px" viewBox="0 0 200 150" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Resources</title>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="#FEF2F2" x="0" y="0" width="200" height="150" rx="8"></rect>
+        <rect stroke="#EF4444" stroke-width="2" fill="#FFFFFF" x="30" y="40" width="140" height="70" rx="6"></rect>
+        <circle fill="#EF4444" opacity="0.2" cx="60" cy="75" r="20"></circle>
+        <circle fill="#EF4444" opacity="0.2" cx="100" cy="75" r="20"></circle>
+        <circle fill="#EF4444" opacity="0.2" cx="140" cy="75" r="20"></circle>
+        <path d="M55,75 L65,75" stroke="#EF4444" stroke-width="2" stroke-linecap="round"></path>
+        <path d="M60,70 L60,80" stroke="#EF4444" stroke-width="2" stroke-linecap="round"></path>
+        <path d="M95,75 L105,75" stroke="#EF4444" stroke-width="2" stroke-linecap="round"></path>
+        <path d="M135,75 L145,75" stroke="#EF4444" stroke-width="2" stroke-linecap="round"></path>
+        <path d="M140,70 L140,80" stroke="#EF4444" stroke-width="2" stroke-linecap="round"></path>
+    </g>
+</svg>
